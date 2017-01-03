@@ -93,7 +93,7 @@ class SwipeToDeleteViewController: ViewController {
         
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
-        
+
         
     }
     
