@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3A366DB8A2E285A68017750D /* Pods_PhotoAnalyzer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6B11E8D6E614CCB562FDC /* Pods_PhotoAnalyzer.framework */; };
 		944529951E1B90200058E200 /* DeleteAllPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529941E1B90200058E200 /* DeleteAllPhotosViewController.swift */; };
-		944529991E1B902C0058E200 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529961E1B902C0058E200 /* Photo.swift */; };
 		9445299A1E1B902C0058E200 /* Deletion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 944529971E1B902C0058E200 /* Deletion.storyboard */; };
 		9445299B1E1B902C0058E200 /* SwipeToDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529981E1B902C0058E200 /* SwipeToDeleteViewController.swift */; };
 		944529B21E1B91080058E200 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529AB1E1B91080058E200 /* Constants.swift */; };
@@ -18,12 +17,19 @@
 		944529B51E1B91080058E200 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529AE1E1B91080058E200 /* Permissions.swift */; };
 		944529B61E1B91080058E200 /* PermissionScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529B01E1B91080058E200 /* PermissionScope.swift */; };
 		944529B71E1B91080058E200 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944529B11E1B91080058E200 /* Structs.swift */; };
+		944ED67F1E2739CA00A2717C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944ED67E1E2739CA00A2717C /* Location.swift */; };
 		949D479A1E1B8D22000CA7C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D47991E1B8D22000CA7C6 /* AppDelegate.swift */; };
 		949D479C1E1B8D22000CA7C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D479B1E1B8D22000CA7C6 /* ViewController.swift */; };
 		949D479F1E1B8D22000CA7C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949D479D1E1B8D22000CA7C6 /* Main.storyboard */; };
 		949D47A11E1B8D22000CA7C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949D47A01E1B8D22000CA7C6 /* Assets.xcassets */; };
 		949D47A41E1B8D22000CA7C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949D47A21E1B8D22000CA7C6 /* LaunchScreen.storyboard */; };
 		949D47AF1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D47AE1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift */; };
+		94A6461C1E2726CD0019C954 /* PAMediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6461B1E2726CD0019C954 /* PAMediaObject.swift */; };
+		94E07ADB1E271F4C00B629D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E07ADA1E271F4C00B629D1 /* MainViewController.swift */; };
+		94E07ADE1E2723CC00B629D1 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADC1E2723CC00B629D1 /* Realm.framework */; };
+		94E07ADF1E2723CC00B629D1 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADC1E2723CC00B629D1 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94E07AE01E2723CC00B629D1 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADD1E2723CC00B629D1 /* RealmSwift.framework */; };
+		94E07AE11E2723CC00B629D1 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADD1E2723CC00B629D1 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +42,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		94E07AE21E2723CC00B629D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				94E07AE11E2723CC00B629D1 /* RealmSwift.framework in Embed Frameworks */,
+				94E07ADF1E2723CC00B629D1 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		05C6B11E8D6E614CCB562FDC /* Pods_PhotoAnalyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoAnalyzer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC385E49390150B349416E9 /* Pods-PhotoAnalyzer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoAnalyzer.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer.release.xcconfig"; sourceTree = "<group>"; };
 		944529941E1B90200058E200 /* DeleteAllPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAllPhotosViewController.swift; sourceTree = "<group>"; };
-		944529961E1B902C0058E200 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		944529971E1B902C0058E200 /* Deletion.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Deletion.storyboard; sourceTree = "<group>"; };
 		944529981E1B902C0058E200 /* SwipeToDeleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToDeleteViewController.swift; sourceTree = "<group>"; };
 		944529AB1E1B91080058E200 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -50,6 +70,7 @@
 		944529AF1E1B91080058E200 /* PermissionScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionScope.h; sourceTree = "<group>"; };
 		944529B01E1B91080058E200 /* PermissionScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionScope.swift; sourceTree = "<group>"; };
 		944529B11E1B91080058E200 /* Structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		944ED67E1E2739CA00A2717C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		949D47961E1B8D22000CA7C6 /* PhotoAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949D47991E1B8D22000CA7C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949D479B1E1B8D22000CA7C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +81,10 @@
 		949D47AA1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoAnalyzerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949D47AE1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAnalyzerUITests.swift; sourceTree = "<group>"; };
 		949D47B01E1B8D22000CA7C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94A6461B1E2726CD0019C954 /* PAMediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMediaObject.swift; sourceTree = "<group>"; };
+		94E07ADA1E271F4C00B629D1 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		94E07ADC1E2723CC00B629D1 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		94E07ADD1E2723CC00B629D1 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		A675F2C16EA86587910CCC3E /* Pods-PhotoAnalyzer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoAnalyzer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E07ADE1E2723CC00B629D1 /* Realm.framework in Frameworks */,
 				3A366DB8A2E285A68017750D /* Pods_PhotoAnalyzer.framework in Frameworks */,
+				94E07AE01E2723CC00B629D1 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +143,8 @@
 		949D478D1E1B8D22000CA7C6 = {
 			isa = PBXGroup;
 			children = (
+				94E07ADC1E2723CC00B629D1 /* Realm.framework */,
+				94E07ADD1E2723CC00B629D1 /* RealmSwift.framework */,
 				944529AA1E1B91080058E200 /* PermissionScope */,
 				949D47981E1B8D22000CA7C6 /* PhotoAnalyzer */,
 				949D47AD1E1B8D22000CA7C6 /* PhotoAnalyzerUITests */,
@@ -138,15 +167,17 @@
 			isa = PBXGroup;
 			children = (
 				944529941E1B90200058E200 /* DeleteAllPhotosViewController.swift */,
+				94E07ADA1E271F4C00B629D1 /* MainViewController.swift */,
+				949D479D1E1B8D22000CA7C6 /* Main.storyboard */,
 				949D47991E1B8D22000CA7C6 /* AppDelegate.swift */,
-				944529961E1B902C0058E200 /* Photo.swift */,
 				944529971E1B902C0058E200 /* Deletion.storyboard */,
 				944529981E1B902C0058E200 /* SwipeToDeleteViewController.swift */,
 				949D479B1E1B8D22000CA7C6 /* ViewController.swift */,
-				949D479D1E1B8D22000CA7C6 /* Main.storyboard */,
 				949D47A01E1B8D22000CA7C6 /* Assets.xcassets */,
 				949D47A21E1B8D22000CA7C6 /* LaunchScreen.storyboard */,
 				949D47A51E1B8D22000CA7C6 /* Info.plist */,
+				94A6461B1E2726CD0019C954 /* PAMediaObject.swift */,
+				944ED67E1E2739CA00A2717C /* Location.swift */,
 			);
 			path = PhotoAnalyzer;
 			sourceTree = "<group>";
@@ -173,6 +204,9 @@
 				949D47941E1B8D22000CA7C6 /* Resources */,
 				FEC75901765D930D4D5B72F8 /* [CP] Embed Pods Frameworks */,
 				8842F84E8CEC4043E48E52D6 /* [CP] Copy Pods Resources */,
+				94E07AE21E2723CC00B629D1 /* Embed Frameworks */,
+				94E07AE31E27247700B629D1 /* ShellScript */,
+				94E07AE41E27248200B629D1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -267,7 +301,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		8842F84E8CEC4043E48E52D6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -275,10 +309,36 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer-resources.sh\"\nbash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+			showEnvVarsInLog = 0;
+		};
+		94E07AE31E27247700B629D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "";
+		};
+		94E07AE41E27248200B629D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
 		A97A325A8F44A7EAC91F50D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -317,8 +377,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A6461C1E2726CD0019C954 /* PAMediaObject.swift in Sources */,
 				944529B51E1B91080058E200 /* Permissions.swift in Sources */,
-				944529991E1B902C0058E200 /* Photo.swift in Sources */,
+				94E07ADB1E271F4C00B629D1 /* MainViewController.swift in Sources */,
 				944529B71E1B91080058E200 /* Structs.swift in Sources */,
 				949D479C1E1B8D22000CA7C6 /* ViewController.swift in Sources */,
 				944529B61E1B91080058E200 /* PermissionScope.swift in Sources */,
@@ -326,6 +387,7 @@
 				9445299B1E1B902C0058E200 /* SwipeToDeleteViewController.swift in Sources */,
 				949D479A1E1B8D22000CA7C6 /* AppDelegate.swift in Sources */,
 				944529B21E1B91080058E200 /* Constants.swift in Sources */,
+				944ED67F1E2739CA00A2717C /* Location.swift in Sources */,
 				944529B31E1B91080058E200 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +529,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q7N3L673D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhotoAnalyzer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryan.PhotoAnalyzer;
@@ -481,6 +547,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q7N3L673D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhotoAnalyzer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryan.PhotoAnalyzer;
