@@ -29,7 +29,6 @@ class DeleteAllPhotosViewController : UIViewController, UITableViewDataSource, U
             
         }
         
-        
         let fet2 = PHFetchOptions()
         fet2.includeHiddenAssets = true
         fet2.includeAllBurstAssets = true
@@ -38,20 +37,39 @@ class DeleteAllPhotosViewController : UIViewController, UITableViewDataSource, U
         
         print(fetchResults2)
         var totalImages = 0
-        for fetchIndex in 0 ... fetchResults2.count - 1 {
+        
+        let photoOptions = PHImageRequestOptions.init()
+        photoOptions.isSynchronous = true
+        photoOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.highQualityFormat
+        photoOptions.isNetworkAccessAllowed = true
+        photoOptions.resizeMode = PHImageRequestOptionsResizeMode.exact
+        photoOptions.version = PHImageRequestOptionsVersion.original
+        
+        var totalMemory: Float = 0.0;
+        /*for fetchIndex in 0 ... fetchResults2.count - 1 {
             let item: PHAsset = fetchResults2.object(at: fetchIndex)
-            self.allPhotos.append(item)
-            print("Date: \(item.creationDate) isHidden: \(item.isHidden)")
-            totalImages += 1
-            self.progressView?.setProgress(Float(totalImages / fetchResults2.count), animated: true)
+            //self.allPhotos.append(item)
             
-        }
+            autoreleasepool {
+                PHImageManager.default().requestImageData(for: item, options: photoOptions, resultHandler: {(data: Data?, identificador: String?, orientaciomImage: UIImageOrientation, info: [AnyHashable: Any]?) -> Void in
+                    
+                    var imageSize = Float(data!.count)
+                
+                    //Transform into Megabytes
+                    imageSize = imageSize/(1024*1024)
+                    totalMemory = imageSize + totalMemory;
+                
+                    print("HERE: Date: \(item.creationDate!) isHidden: \(item.isHidden)\tSIZE: \(imageSize)\tTOTAL: \(totalMemory)\tDICT: \(info)")
+                
+                    self.progressView?.setProgress(Float(totalImages / fetchResults2.count), animated: true)
+                })
+            
+                totalImages += 1
+            }
+        }*/
         print("Total: \(totalImages)")
-        
-        
-
     }
-    
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1;
@@ -71,6 +89,11 @@ class DeleteAllPhotosViewController : UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("MEMORY WARNING")
     }
     
     
