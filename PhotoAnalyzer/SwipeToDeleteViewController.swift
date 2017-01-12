@@ -43,6 +43,7 @@ class SwipeToDeleteViewController: ViewController {
         
         //For moments
         var totalImages = 0
+        
         for fetchIndex in 0 ... fetchResults.count - 1 {
             let item: PHAssetCollection = fetchResults.object(at: fetchIndex)
             print("Type: \(item.assetCollectionType) on \(item.startDate) to \(item.endDate)")
@@ -60,10 +61,29 @@ class SwipeToDeleteViewController: ViewController {
         let fetchResults2 = PHAsset.fetchAssets(with: fet2)
         print(fetchResults2)
         totalImages = 0
+        
+        let photoOptions = PHImageRequestOptions.init()
+        photoOptions.isSynchronous = true
+        photoOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.highQualityFormat
+        photoOptions.isNetworkAccessAllowed = true
+        photoOptions.resizeMode = PHImageRequestOptionsResizeMode.exact
+        photoOptions.version = PHImageRequestOptionsVersion.original
+        
+        
         for fetchIndex in 0 ... fetchResults2.count - 1 {
             let item: PHAsset = fetchResults2.object(at: fetchIndex)
-        
-            print("Date: \(item.creationDate) isHidden: \(item.isHidden)")
+            
+            PHImageManager.default().requestImageData(for: item, options: photoOptions, resultHandler: {(data: Data?, identificador: String?, orientaciomImage: UIImageOrientation, info: [AnyHashable: Any]?) -> Void in
+                //transform into image
+            
+            //Get bytes size of image
+            var imageSize = Float(data!.count)
+            
+                //Transform into Megabytes
+                imageSize = imageSize/(1024*1024)
+                print("HERE: Date: \(item.creationDate!) isHidden: \(item.isHidden)\tSIZE: \(imageSize)")
+            })
+    
             totalImages += 1
         }
         print("Total: \(totalImages)")
