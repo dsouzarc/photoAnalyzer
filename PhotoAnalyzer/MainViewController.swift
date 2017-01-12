@@ -15,6 +15,16 @@ class MainViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func viewAllPhotosAction(_ sender: Any) {
+        
+        let swipeToDeleteStoryBoard = UIStoryboard.init(name: "Deletion", bundle: nil)
+        let swipeToDeleteVC = swipeToDeleteStoryBoard.instantiateInitialViewController()
+        
+        self.view.window?.rootViewController  = swipeToDeleteVC;
+
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
