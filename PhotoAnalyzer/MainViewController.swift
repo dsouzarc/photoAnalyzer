@@ -12,6 +12,9 @@ import RealmSwift
 import Photos
 import MRProgress
 
+import UIKit
+import VHUD
+
 class MainViewController: UIViewController {
     
     static let KB_TO_MB: Double = 1024.0 * 1024.0
@@ -21,24 +24,12 @@ class MainViewController: UIViewController {
     var progressView: MRProgressOverlayView?
     
     required init(coder: NSCoder) {
-        
-        self.realmDB = MainViewController.getDefaultRealmDB()
+        self.realmDB = RealmDBManager.getRealmDBInstance()
         super.init(coder: coder)!
-    }
-    
-    static func getDefaultRealmDB() -> Realm {
-        do {
-            return try Realm()
-        } catch _ {
-            let defaultPath: URL = Realm.Configuration.defaultConfiguration.fileURL!
-            try! FileManager.default.removeItem(at: defaultPath)
-            return try! Realm()
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction func viewAllPhotosAction(_ sender: Any) {
@@ -64,6 +55,7 @@ class MainViewController: UIViewController {
     }
     
     func addAllPhotosToDB() {
+        
         DispatchQueue.global(qos: .userInitiated).async {
             
             let fetchOptions = PHFetchOptions()
@@ -72,16 +64,22 @@ class MainViewController: UIViewController {
             
             let fetchResults: PHFetchResult<PHAsset> = PHAsset.fetchAssets(with: fetchOptions)
             let totalImages: Int = fetchResults.count
-            var finishedCount: Int = 0
+            
+            var finishedPhotosCount: Int = 0
+            var finishedNonPhotosCount: Int = 0
             var errorCount: Int = 0
             
             DispatchQueue.main.async {
                 let totalImagesString: String = NumberFormatter.localizedString(from: NSNumber(value: totalImages), number: NumberFormatter.Style.decimal)
                 
                 self.progressView = MRProgressOverlayView.showOverlayAdded(to: self.view, title: "Analyzing \(totalImagesString) pictures and videos", mode: MRProgressOverlayViewMode.determinateCircular, animated: true)!
+                
+                /*var content = VHUDContent(Mode.percentComplete, Shape.circle, Style.dark, Background.color(#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 0.7)))
+                content.loadingText = "\(totalImagesString) \nPhotos & Videos"
+                VHUD.show(content) */
             }
             
-            let realmDB = MainViewController.getDefaultRealmDB()
+            let realmDB = RealmDBManager.getRealmDBInstance()
             realmDB.beginWrite()
             realmDB.deleteAll()
             
@@ -93,7 +91,7 @@ class MainViewController: UIViewController {
             let refreshInterval: Int = Int(ceil(Double(totalImages) * 0.01))
             
             var queuedMedias: [PAMediaObject] = [PAMediaObject]()
-            
+
             fetchResults.enumerateObjects({(item: PHAsset!, count: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
 
                 autoreleasepool {
@@ -115,7 +113,7 @@ class MainViewController: UIViewController {
                                     
                                     let mediaObject: PAMediaObject = PAMediaObject.init(mediaAsset: item, photoSizeMB: largestSizeMB)
                                     queuedMedias.append(mediaObject)
-                                    finishedCount += 1
+                                    finishedNonPhotosCount += 1
                                 } else {
                                     errorCount += 1
                                 }
@@ -132,12 +130,11 @@ class MainViewController: UIViewController {
                             let imageSize: Double = Double(data!.count) / MainViewController.KB_TO_MB
                             let mediaObject: PAMediaObject = PAMediaObject.init(mediaAsset: item, photoSizeMB: imageSize)
                             
-                            finishedCount += 1
-                            //queuedMedias.append(mediaObject)
                             realmDB.add(mediaObject)
-                            if(finishedCount % refreshInterval == 0) {
+                            finishedPhotosCount += 1
+                            if(finishedPhotosCount % refreshInterval == 0) {
                                 DispatchQueue.main.async {
-                                    self.progressView?.setProgress(Float(finishedCount) / Float(totalImages), animated: true)
+                                    self.progressView?.setProgress(Float(finishedPhotosCount) / Float(totalImages), animated: true)
                                 }
                             }
                         })
@@ -151,35 +148,26 @@ class MainViewController: UIViewController {
             })
             
             //Wait until we have almost everything
-            print("GOT HERE TO WAIT")
-            while(Swift.abs(totalImages - (errorCount + finishedCount)) >= 10) {
+            while(Swift.abs(totalImages - (errorCount + finishedPhotosCount + finishedNonPhotosCount)) != 0) {
                 //La dee la dee la
-                print("WAITING. TOTAL: \(totalImages)\tERROR COUNT: \(errorCount)\tFINISHED: \(finishedCount)\tDIFF: \(Swift.abs(totalImages - (errorCount + finishedCount)))")
             }
-            
-            print("DONE WAITING")
-            
+
             //Save and commit the video objects
             realmDB.add(queuedMedias)
             queuedMedias.removeAll()
             try! realmDB.commitWrite()
             
-            print("JUST FINISHED WRITING!!")
+            print("SAVED: \(finishedPhotosCount + finishedNonPhotosCount)\tOut of: \(totalImages)\tErrors: \(errorCount)")
             
             //Update the progress view
             DispatchQueue.main.sync {
                 self.progressView?.mode = MRProgressOverlayViewMode.checkmark
-                //let circularProgressView: MRCircularProgressView = self.progressView?.modeView as! MRCircularProgressView
-                //circularProgressView.valueLabel.text = "\(finishedCount) / \(totalImages)"
                 
                 //Wait for a bit and then hide it
                 DispatchQueue.global(qos: .userInitiated).async {
                     usleep(500000)
                     DispatchQueue.main.sync {
                         self.progressView?.hide(true)
-                        
-                        let allPhotos = self.realmDB.objects(PAMediaObject)
-                        print("Finished \(finishedCount) out of \(totalImages)\tError Count\(errorCount)\tRealm has: \(allPhotos.count)")
                     }
                 }
             }
