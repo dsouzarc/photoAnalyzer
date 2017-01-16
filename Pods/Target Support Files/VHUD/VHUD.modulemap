@@ -1,0 +1,6 @@
+framework module VHUD {
+  umbrella header "VHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}

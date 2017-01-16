@@ -25,6 +25,7 @@
 		949D47A41E1B8D22000CA7C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949D47A21E1B8D22000CA7C6 /* LaunchScreen.storyboard */; };
 		949D47AF1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D47AE1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift */; };
 		94A6461C1E2726CD0019C954 /* PAMediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6461B1E2726CD0019C954 /* PAMediaObject.swift */; };
+		94C3FE251E2D2F8D00CD6DEC /* RealmDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3FE241E2D2F8D00CD6DEC /* RealmDBManager.swift */; };
 		94E07ADB1E271F4C00B629D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E07ADA1E271F4C00B629D1 /* MainViewController.swift */; };
 		94E07ADE1E2723CC00B629D1 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADC1E2723CC00B629D1 /* Realm.framework */; };
 		94E07ADF1E2723CC00B629D1 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94E07ADC1E2723CC00B629D1 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -82,6 +83,7 @@
 		949D47AE1E1B8D22000CA7C6 /* PhotoAnalyzerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAnalyzerUITests.swift; sourceTree = "<group>"; };
 		949D47B01E1B8D22000CA7C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94A6461B1E2726CD0019C954 /* PAMediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMediaObject.swift; sourceTree = "<group>"; };
+		94C3FE241E2D2F8D00CD6DEC /* RealmDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDBManager.swift; sourceTree = "<group>"; };
 		94E07ADA1E271F4C00B629D1 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		94E07ADC1E2723CC00B629D1 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		94E07ADD1E2723CC00B629D1 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		949D47981E1B8D22000CA7C6 /* PhotoAnalyzer */ = {
 			isa = PBXGroup;
 			children = (
+				94C3FE241E2D2F8D00CD6DEC /* RealmDBManager.swift */,
 				944529941E1B90200058E200 /* DeleteAllPhotosViewController.swift */,
 				94E07ADA1E271F4C00B629D1 /* MainViewController.swift */,
 				949D479D1E1B8D22000CA7C6 /* Main.storyboard */,
@@ -311,7 +314,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer-resources.sh\"\nbash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAnalyzer/Pods-PhotoAnalyzer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94E07AE31E27247700B629D1 /* ShellScript */ = {
@@ -383,6 +386,7 @@
 				944529B71E1B91080058E200 /* Structs.swift in Sources */,
 				949D479C1E1B8D22000CA7C6 /* ViewController.swift in Sources */,
 				944529B61E1B91080058E200 /* PermissionScope.swift in Sources */,
+				94C3FE251E2D2F8D00CD6DEC /* RealmDBManager.swift in Sources */,
 				944529951E1B90200058E200 /* DeleteAllPhotosViewController.swift in Sources */,
 				9445299B1E1B902C0058E200 /* SwipeToDeleteViewController.swift in Sources */,
 				949D479A1E1B8D22000CA7C6 /* AppDelegate.swift in Sources */,
@@ -537,6 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryan.PhotoAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -555,6 +560,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryan.PhotoAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
