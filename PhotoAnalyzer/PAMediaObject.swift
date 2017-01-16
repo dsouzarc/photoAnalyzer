@@ -14,35 +14,26 @@ import Realm
 
 class PAMediaObject: Object {
     
-    dynamic var localIdentifier: String
-    dynamic var mediaType: PHAssetMediaType
-    dynamic var mediaSubtype: PHAssetMediaSubtype
-    dynamic var pixelWidth: Int
-    dynamic var pixelHeight: Int
-    dynamic var creationDate: Date
-    dynamic var location: Location?
-    dynamic var duration: TimeInterval
-    dynamic var photoSizeMB: Double
+    dynamic var localIdentifier: String = ""
+    dynamic var mediaType: PHAssetMediaType = PHAssetMediaType.image
+    dynamic var mediaSubtype: PHAssetMediaSubtype = PHAssetMediaSubtype.photoLive
+    dynamic var pixelWidth: Int = -1
+    dynamic var pixelHeight: Int = -1
+    dynamic var creationDate: Date = Date()
+    dynamic var location: Location? = Location()
+    dynamic var duration: TimeInterval = TimeInterval(-1.0)
+    dynamic var photoSizeMB: Double = -1.0
     
     required init() {
-        self.localIdentifier = "test_value"
-        self.mediaType = PHAssetMediaType.image
-        self.mediaSubtype = PHAssetMediaSubtype.photoLive
-        self.pixelWidth = -1
-        self.pixelHeight = -1
-        self.creationDate = Date()
-        self.location = Location()
-        self.duration = TimeInterval(-1.0)
-        self.photoSizeMB = -1.0
         super.init()
     }
     
-    required convenience init(realm: RLMRealm, schema: RLMObjectSchema) {
-        self.init()
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
     }
     
-    required convenience init(value: Any, schema: RLMSchema) {
-        self.init()
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
     }
     
     init(localIdentifier: String, mediaType: PHAssetMediaType, mediaSubtype: PHAssetMediaSubtype, pixelWidth: Int, pixelHeight: Int, creationDate: Date, location: CLLocation, duration: TimeInterval, photoSizeMB: Double) {
